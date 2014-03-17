@@ -18,6 +18,10 @@ private:
 
 	//클라이언트 소켓 주소
 	SOCKADDR_IN clntAddr;
+
+	//데이터들
+	int Rvalue;
+	int Lvalue;
 	
 public:
 	CSoketServer();
@@ -25,11 +29,15 @@ public:
 
 	bool init();
 
+	void LastInput();
+
+	void LValueInput();
+
+	void RvalueInput();
+
 	void Loop();
 
-	int Rvalue;
-	int Lvalue;
-	int Result;
+
 
 };
 

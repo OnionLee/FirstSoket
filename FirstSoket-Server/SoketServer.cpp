@@ -55,6 +55,43 @@ bool CSoketServer::init()
 	printf("클라이언트 접속\n");
 	printf("IP : %s , Port : %d\n", inet_ntoa(clntAddr.sin_addr), clntAddr.sin_port);
 
+	RvalueInput();
+
+	LValueInput();
+
+
+	LastInput();
+
+
+
+}
+
+void CSoketServer::Loop()
+{
+	while (1)
+	{
+		char buf[255];
+		memset(buf, 0, sizeof(buf));
+		int recvsize = recv(hClntSock, buf, sizeof(buf), 0);
+	
+		buf[recvsize = '\0'];
+		if (strcmp(buf, "x") == 0)
+		{
+			printf("접속 종료\n");
+			break;
+		}
+		printf("client >> %s\n", buf);
+		int sendsize = send(hClntSock, buf, strlen(buf), 0);
+
+	}
+
+	closesocket(hClntSock);
+	closesocket(hServSock);
+	WSACleanup();
+}
+
+void CSoketServer::RvalueInput()
+{
 	printf("안녕하세요. 첫번째 수를 입력 해 주세요!");
 	while (true)
 	{
@@ -69,7 +106,10 @@ bool CSoketServer::init()
 			break;
 		}
 	}
+}
 
+void CSoketServer::LValueInput()
+{
 	printf("두번째 수를 입력 해 주세요!");
 	while (true)
 	{
@@ -84,7 +124,10 @@ bool CSoketServer::init()
 			break;
 		}
 	}
+}
 
+void CSoketServer::LastInput()
+{
 	printf("수식을 입력 해 주세요!");
 	while (true)
 	{
@@ -121,31 +164,5 @@ bool CSoketServer::init()
 			}
 		}
 	}
-
-
-}
-
-void CSoketServer::Loop()
-{
-	while (1)
-	{
-		char buf[255];
-		memset(buf, 0, sizeof(buf));
-		int recvsize = recv(hClntSock, buf, sizeof(buf), 0);
-	
-		buf[recvsize = '\0'];
-		if (strcmp(buf, "x") == 0)
-		{
-			printf("접속 종료\n");
-			break;
-		}
-		printf("client >> %s\n", buf);
-		int sendsize = send(hClntSock, buf, strlen(buf), 0);
-
-	}
-
-	closesocket(hClntSock);
-	closesocket(hServSock);
-	WSACleanup();
 }
 
